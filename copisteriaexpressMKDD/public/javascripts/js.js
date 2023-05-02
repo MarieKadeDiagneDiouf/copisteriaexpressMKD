@@ -105,6 +105,7 @@ function limpiar(id) {
 
   function rellenarColores(impresora, data) {
     let container = document.getElementById(impresora);
+    console.log(container)
     container.querySelector('.negro').innerHTML = data.negro + "%";
     container.querySelector('.amarillo').innerHTML = data.amarillo + "%";
     container.querySelector('.cyan').innerHTML = data.cian + "%";

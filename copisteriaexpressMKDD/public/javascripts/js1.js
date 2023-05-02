@@ -1,43 +1,40 @@
 
-  
-
-  
 
 document.addEventListener('DOMContentLoaded', async () => {
-    let printer0 = "printer0";
-    let printer1 = "printer1";
-    let printer2 = "printer2";
+    let imprimirIds = ["imprimir0", "imprimir1", "imprimir2"];
+    let rellenarIds = ["rellenar0", "rellenar1", "rellenar2"];
+    let printerIds = ["printer0", "printer1", "printer2"];
+  
 
+    let printers = [];
+    let imprimirElements = [];
+    let rellenarElements = [];
 
-    let firstPrinter = document.getElementById(printer0);
-    let secondPrinter = document.getElementById(printer1);
-    let thirdPrinter = document.getElementById(printer2);
+    for (let i = 0; i < printerIds.length; i++) {
+    printers.push(printerIds[i]);
+    console.log(printers)
+    imprimirElements.push(document.getElementById(imprimirIds[i]));
+    rellenarElements.push(document.getElementById(rellenarIds[i]));
+    }
 
-    let imprimir0 = document.getElementById("imprimir0");
-    let imprimir1 = document.getElementById("imprimir1");
-    let imprimir2 = document.getElementById("imprimir2");
-
-    let sendButton = document.getElementById('enviar');
+    let boton = document.getElementById('enviar');
     let info = document.getElementById('info');
     let idImpresora = document.getElementById('idImpresora');
 
-    let rellenar0 = document.getElementById('rellenar0');
-    let rellenar1 = document.getElementById('rellenar1');
-    let rellenar2 = document.getElementById('rellenar2');
 
     let data = await getPrinters();
 
    
 
-    rellenarColores(printer0, data[0]);
-    rellenarColores(printer1, data[1]);
-    rellenarColores(printer2, data[2]);
+    rellenarColores(printers[0], data[0]);
+    rellenarColores(printers[1], data[1]);
+    rellenarColores(printers[2], data[2]);
 
-    limpiar(printer0);
-    limpiar(printer1);
-    limpiar(printer2);
+    limpiar(printers[0]);
+    limpiar(printers[1]);
+    limpiar(printers[2]);
 
-    sendButton.addEventListener('click', () => {
+    boton.addEventListener('click', () => {
         let printer = "printer" + idImpresora.value;
         let queuePrinter = JSON.parse(sessionStorage.getItem(printer)) || [];
         queuePrinter.push(info.value);
@@ -47,8 +44,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         limpiar(printer);
     });
 
-    imprimir0.addEventListener('click', async () => {
-        let queuePrinter = JSON.parse(sessionStorage.getItem(printer0)) || [];
+    imprimirElements[0].addEventListener('click', async () => {
+        let queuePrinter = JSON.parse(sessionStorage.getItem(printers[0])) || [];
         let work = queuePrinter.shift();
         let data = await getPrinters();
         let cost = ajustarValores(work, data[0], black, yellow, magenta, cyan);
@@ -60,10 +57,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 },
                 body: JSON.stringify(cost)
             }).then(() => {
-                sessionStorage.setItem(printer0, JSON.stringify(queuePrinter));
-                limpiar(printer0);
+                sessionStorage.setItem(printers[0], JSON.stringify(queuePrinter));
+                limpiar(printers[0]);
             }).then(() => {
-                rellenarColores(printer0, data[0]);
+                rellenarColores(printers[0], data[0]);
                 location.reload();
             });
         } else {
@@ -71,8 +68,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    imprimir1.addEventListener('click', async () => {
-        let queuePrinter = JSON.parse(sessionStorage.getItem(printer1)) || [];
+    imprimirElements[1].addEventListener('click', async () => {
+        let queuePrinter = JSON.parse(sessionStorage.getItem(printers[1])) || [];
         let work = queuePrinter.shift();
         let data = await getPrinters();
         let cost = ajustarValores(work, data[1], black, yellow, magenta, cyan);
@@ -85,11 +82,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 },
                 body: JSON.stringify(cost)
             }).then(() => {
-                sessionStorage.setItem(printer1, JSON.stringify(queuePrinter));
-                limpiar(printer1);
+                sessionStorage.setItem(printers[1], JSON.stringify(queuePrinter));
+                limpiar(printers[1]);
 
             }).then(() => {
-                rellenarColores(printer1, data[1]);
+                rellenarColores(printers[1], data[1]);
                 location.reload();
             });
         } else {
@@ -98,8 +95,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     });
 
-    imprimir2.addEventListener('click', async () => {
-        let queuePrinter = JSON.parse(sessionStorage.getItem(printer2)) || [];
+    imprimirElements[2].addEventListener('click', async () => {
+        let queuePrinter = JSON.parse(sessionStorage.getItem(printers[2])) || [];
         let work = queuePrinter.shift();
         let data = await getPrinters();
         let cost = ajustarValores(work, data[2], black, yellow, magenta, cyan);
@@ -112,10 +109,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 },
                 body: JSON.stringify(cost)
             }).then(() => {
-                sessionStorage.setItem(printer2, JSON.stringify(queuePrinter));
-                limpiar(printer2);
+                sessionStorage.setItem(printers[2], JSON.stringify(queuePrinter));
+                limpiar(printers[2]);
             }).then(() => {
-                rellenarColores(printer2, data[2]);
+                rellenarColores(printers[2], data[2]);
                 location.reload();
             });
         } else {
@@ -125,7 +122,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
 
-    rellenar0.addEventListener('click', () => {
+   rellenarElements[0].addEventListener('click', () => {
         fetch('/impresoras/' + 1, {
             method: 'PUT',
             headers: {
@@ -142,7 +139,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         })
     });
 
-    rellenar1.addEventListener('click', () => {
+    rellenarElements[1].addEventListener('click', () => {
         fetch('/impresoras/' + 2, {
             method: 'PUT',
             headers: {
@@ -159,7 +156,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         })
     });
 
-    rellenar2.addEventListener('click', () => {
+    rellenarElements[2].addEventListener('click', () => {
         fetch('/impresoras/' + 3, {
             method: 'PUT',
             headers: {
