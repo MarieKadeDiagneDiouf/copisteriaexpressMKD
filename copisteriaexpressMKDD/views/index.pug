@@ -1,0 +1,75 @@
+doctype html
+head
+  title Copisteria MARIE KADE
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  link(rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+  script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
+  script(src='../javascripts/js.js')
+  script(src='../javascripts/js1.js')
+  link(rel="stylesheet", href="../stylesheets/style.css")
+  style.
+    .tinta {
+    width: 50px;
+    height: 50px;
+    float: left;
+    padding: 5px;
+    }
+.container
+  //
+    <div class="jumbotron">
+    <h1>Copisteria Julian</h1>
+    <p>Usa la impresora que mejor te vaya!</p>
+    </div>
+  .row
+    h3 Hojas:1
+    p Introduce la impresora el texto a imprimir
+    form.form-inline(action='index.php' method='get' role='form')
+      | Impresora: 
+      select.form-control#idImpresora(name='n_impresora')
+        option(value='0') Impresora0
+        option(value='1') Impresora1
+        option(value='2') Impresora2
+  textarea.form-control#info(rows='4' name='texto')
+  input#enviar(type='submit' value='Enviar a impresora')
+.row
+  .col-sm-4#printer0
+    .row
+      a#imprimir0(href='#')
+         img(src='../images/A4.jpg' alt='Procesa cola')
+    .row
+      .toner
+        .tinta.negro(style='background-color:black') 100%
+        .tinta.amarillo(style='background-color:yellow') 100%
+        .tinta.cyan(style='background-color:cyan') 100%
+        .tinta.magenta(style='background-color:magenta') 100%
+    .row
+      ul.list-group
+    button#rellenar0 Rellenar
+  .col-sm-4#printer1
+    .row
+      a#imprimir1(href='#')
+        img(src='../images/A2.jpg' alt='Procesa cola')
+    .row
+      .toner
+        .tinta.negro(style='background-color:black') 100%
+        .tinta.amarillo(style='background-color:yellow') 100%
+        .tinta.cyan(style='background-color:cyan') 100%
+        .tinta.magenta(style='background-color:magenta') 100%
+    .row
+      ul.list-group
+    button#rellenar1 Rellenar
+  .col-sm-4#printer2
+    .row
+      a#imprimir2(href='#')
+       img(src='../images/A3.jpg' alt='Procesa cola')
+    .row
+      .toner
+        .tinta.negro(style='background-color:black') 100%
+        .tinta.amarillo(style='background-color:yellow') 100%
+        .tinta.cyan(style='background-color:cyan') 100%
+        .tinta.magenta(style='background-color:magenta') 100%
+    .row
+      ul.list-group
+    button#rellenar2 Rellenar
